@@ -1,0 +1,53 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- <link rel="stylesheet" href="css\bootstrap.css"> -->
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" />
+
+    <title>DMS</title>
+    <style>
+        body {
+            background-color: #e0f7fc;
+        }
+
+        .logo {
+            margin-top: 50px;
+            margin-bottom: 20px;
+        }
+
+        .buttons-container {
+            margin-top: 20px;
+        }
+
+        .btn-custom {
+            width: 150px;
+            font-size: 18px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body class="bg-$cyan-200">
+    <div class="container text-center">
+        <!-- Logo -->
+        <div class="logo">
+            <img src="https://github.com/MohammadMKJaffal/Mohammad-Jaffal/DM.png" alt="Logo" style="width: 100px;">
+            <h1 class="mt-3">DMS</h1>
+        </div>
+
+        <!-- Buttons -->
+        <div class="buttons-container">
+            <a href="https://localhost:7238/Doctors/DoctorHome" class="btn btn-primary btn-custom mx-2">Doctor</a>
+            <a href="https://localhost:7238/Secretaries" class="btn btn-primary btn-custom mx-2">Secretary</a>
+        </div>
+    </div>
+
+
+
+    <script src="js\popper.min.js"></script>
+    <script src="js\jquery-3.7.1.min.js"></script>
+    <script src="js\bootstrap.js"></script>
+</body>

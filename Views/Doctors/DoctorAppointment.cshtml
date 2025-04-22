@@ -1,0 +1,253 @@
+﻿@model DMS_3.Models.Appointment
+@{
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <!-- <link rel="stylesheet" href="css\bootstrap.css"> -->
+        <link rel="stylesheet"
+              href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" />
+        <title>CMS</title>
+        <style>
+            td, tr, th {
+                border: 1px solid black;
+                text-align: center;
+            }
+        </style>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    </head>
+    <body>
+
+
+        <div class="container-fluid ">
+            <div class="row flex-nowrap">
+                <div class="col-auto col-md-3 col-xl-2 px-sm-2 px-0 text-dark" style="background-color: rgba(127, 227, 255, 0.144);">
+                    <div class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-100">
+                        <a href="/" class="d-flex align-items-center pb-3 mb-md-0 me-md-auto text-white text-decoration-none">
+                            <span class="fs-5 d-none d-sm-inline">Clinic</span>
+                        </a>
+                        <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">
+                            <li>
+                                <a asp-action="DoctorHome" data-bs-toggle="collapse" class="nav-link px-0 align-middle">
+                                    <i class="fs-4 bi-speedometer2"></i> <span class="ms-1 d-none d-sm-inline active ">Dashboard</span>
+                                </a>
+                                <ul class="collapse show nav flex-column ms-1" id="submenu1" data-bs-parent="#menu">
+                                    <li class="w-100">
+                                </ul>
+                            </li>
+                            <li>
+                                <a asp-action="DoctorAppointment" class="nav-link px-0 align-middle">
+                                    <i class="fs-4 bi-table"></i> <span class="ms-1 d-none d-sm-inline">My Appointments</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a asp-action="Patients" data-bs-toggle="collapse" class="nav-link px-0 align-middle">
+                                    <i class="bi bi-people fs-4"></i> <span class="ms-1 d-none d-sm-inline">Patients</span>
+                                </a>
+
+                            </li>
+                        </ul>
+                        <hr>
+                        <div class="dropdown pb-4">
+                            <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle text-dark" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
+                                <img src="https://github.com/mdo.png" alt="hugenerd" width="30" height="30" class="rounded-circle">
+                                <span class="d-none d-sm-inline mx-1">Secartary</span>
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-dark text-small shadow">
+                                <li><a class="dropdown-item" href="#">Settings</a></li>
+                                <li><a class="dropdown-item" href="#">Profile</a></li>
+                                <li>
+                                    <hr class="dropdown-divider">
+                                </li>
+                                <li><a class="dropdown-item" href="https://localhost:7238">Sign out</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col py-3">
+                    <div class="table-responsive">
+                        <nav class="navbar bg-body-tertiary">
+                            <div class="container-fluid">
+                                <form class="d-flex" role="search">
+                                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                                    <button class="btn btn-outline-success" type="submit">Search</button>
+                                </form>
+                            </div>
+                        </nav>
+                        <span position-relative>
+
+                            <i class="bi bi-hourglass-split fs-1"></i>
+                            <h1 class="" style="display: inline;">Appointment</h1>
+
+                            <span class="dropdown position-absolute end-0 bordar">
+
+                                <button type="button" class="btn btn-primary mb-4" data-bs-toggle="modal" data-bs-target="#appointmentModal"><i class="bi bi-plus"></i>Add Appointment</button>
+                                <div class="modal fade" id="appointmentModal" tabindex="-1" aria-labelledby="modalLabel" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="modalLabel">New Appointment</h5>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body">
+
+                                                <form asp-action="CreateAppointment" asp-controller="Home">
+                                                    <div class="mb-3">
+                                                        <label for="appointment-id" class="form-label">Appointment ID</label>
+                                                        <input type="number" name="appointment-id" id="appointmentId" asp-for="Id">
+                                                    </div>
+                                                    <div class="mb-3">
+                                                        <label for="patient-id" class="form-label">Patient ID</label>
+                                                        <input type="number" name="patient-id" id="patientId" asp-for="PatientId">
+                                                    </div>
+                                                    <div class="mb-3">
+                                                        <label for="doctor-id" class="form-label">Doctor ID</label>
+                                                        <input type="number" name="doctor-id" id="doctorId" asp-for="DoctorId">
+                                                    </div>
+                                                    <div class="mb-3">
+                                                        <label for="appointmentDate" class="form-label">Date</label>
+                                                        <input type="date" class="form-control" id="appointmentDate" asp-for="Date">
+                                                    </div>
+                                                    <div class="mb-3">
+                                                        <label for="appointmentTime" class="form-label">Time</label>
+                                                        <input type="time" class="form-control" id="appointmentTime" asp-for="Time">
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                        <button type="submit" class="btn btn-primary">Save Appointment</button>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <button class="btn btn-secondary dropdown-toggle bg-light text-dark mb-4" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    Doctors
+                                </button>
+                                <ul class="dropdown-menu">
+                                    <li><a class="dropdown-item" href="#">Dr 1</a></li>
+                                    <li><a class="dropdown-item" href="#">Dr 2</a></li>
+                                    <li><a class="dropdown-item" href="#">Dr 3</a></li>
+                                </ul>
+                                <i class="bi bi-calendar3 fs-1 position-absolut end-0"></i>
+                            </span>
+                        </span>
+                        <table class="table table-primary"
+                               style="border: 1px solid black; ">
+                            <thead style="border: 1px solid black;">
+                                <tr>
+                                    <th scope="col">su</th>
+                                    <th scope="col">Mo</th>
+                                    <th scope="col">Tu</th>
+                                    <th scope="col">We</th>
+                                    <th scope="col">Th</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="">
+                                    <td class="" style="background-color: rgba(0, 255, 0, 0.441); color: white;">
+                                        <h5 class="text-center">
+                                            Availbale
+                                        </h5>
+                                        <p class="text-center">10:00AM - 12:30PM</p>
+                                    </td>
+                                    <td class="" style="background-color: rgba(0, 255, 0, 0.441); color: white;">
+                                        <h5 class="text-center">
+                                            Availbale
+                                        </h5>
+                                        <p class="text-center">10:00AM - 12:30PM</p>
+                                    </td>
+                                    <td class="" style="background-color: rgba(255, 0, 0, 0.441); color: white;">
+                                        <h5 class="text-center">
+                                            Patient
+                                        </h5>
+                                        <p class="text-center">10:00AM - 12:30PM</p>
+                                    </td>
+                                    <td class="" style="background-color: rgba(255, 0, 0, 0.441); color: white;">
+                                        <h5 class="text-center">
+                                            Patient
+                                        </h5>
+                                        <p class="text-center">10:00AM - 12:30PM</p>
+                                    </td>
+                                    <td class="" style="background-color: rgba(0, 255, 0, 0.441); color: white;">
+                                        <h5 class="text-center">
+                                            Availbale
+                                        </h5>
+                                        <p class="text-center">10:00AM - 12:30PM</p>
+                                    </td>
+
+                                </tr>
+                                <tr class="">
+                                    <td class="" style="background-color: rgba(0, 255, 0, 0.441); color: white;">
+                                        <h5 class="text-center">
+                                            Availbale
+                                        </h5>
+                                        <p class="text-center">10:00AM - 12:30PM</p>
+                                    </td>
+                                    <td class="" style="background-color: rgba(0, 255, 0, 0.441); color: white;">
+                                        <h5 class="text-center">
+                                            Availbale
+                                        </h5>
+                                        <p class="text-center">10:00AM - 12:30PM</p>
+                                    </td>
+                                    <td class="" style="background-color: rgba(255, 0, 0, 0.441); color: white;">
+                                        <h5 class="text-center">
+                                            Patient
+                                        </h5>
+                                        <p class="text-center">10:00AM - 12:30PM</p>
+                                    </td>
+                                    <td class="" style="background-color: rgba(255, 0, 0, 0.441); color: white;">
+                                        <h5 class="text-center">
+                                            Patient
+                                        </h5>
+                                        <p class="text-center">10:00AM - 12:30PM</p>
+                                    </td>
+                                    <td class="" style="background-color: rgba(0, 255, 0, 0.441); color: white;">
+                                        <h5 class="text-center">
+                                            Availbale
+                                        </h5>
+                                        <p class="text-center">10:00AM - 12:30PM</p>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="" style="background-color: rgba(0, 255, 0, 0.441); color: white;">
+                                        <h5 class="text-center">
+                                            Availbale
+                                        </h5>
+                                        <p class="text-center">10:00AM - 12:30PM</p>
+                                    </td>
+                                    <td class="" style="background-color: rgba(255, 0, 0, 0.441); color: white;">
+                                        <h5 class="text-center">
+                                            Patient
+                                        </h5>
+                                        <p class="text-center">10:00AM - 12:30PM</p>
+                                    </td>
+                                    <td class="" style="background-color: rgba(255, 0, 0, 0.441); color: white;">
+                                        <h5 class="text-center">
+                                            Patient
+                                        </h5>
+                                        <p class="text-center">10:00AM - 12:30PM</p>
+                                    </td>
+                                    <td class="" style="background-color: rgba(255, 0, 0, 0.441); color: white;">
+                                        <h5 class="text-center">
+                                            Patient
+                                        </h5>
+                                        <p class="text-center">10:00AM - 12:30PM</p>
+                                    </td>
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    </body>
+    </html>
+}
